@@ -1,5 +1,3 @@
-Include the date, participants or roles, artifacts demonstrated, discussion points, decisions, action points, risks, feedback, customer approvals, and resulting changes. Link to affected stories, prototype screens, API/interface artifacts, or other evidence where relevant.
-
 # Meeting summary
 
 ---
