@@ -121,31 +121,36 @@
             opacity: 0.9;
             box-shadow: 0 0 15px rgba(0, 219, 233, 0.4);
         }
+        .neon-glow-purple {
+            box-shadow: 0 0 15px rgba(220, 184, 255, 0.3);
+        }
     </style>
 </head>
-<body class="bg-background text-on-surface min-h-screen flex flex-col font-body-md selection:bg-primary/30 selection:text-primary" style="width: 1280px; height: 1980px; margin: 0 auto; position: relative; overflow: hidden;">
+<body class="bg-background text-on-surface min-h-screen flex flex-col font-body-md selection:bg-primary/30 selection:text-primary" style="width: 1280px; margin: 0 auto; position: relative; overflow-x: hidden;">
 <!-- Navigation -->
-<nav class="fixed top-0 z-50 w-[1280px] bg-background/80 backdrop-blur-xl border-b border-white/10 shadow-[0_4px_30px_rgba(0,0,0,0.5)]">
+<nav class="fixed top-0 left-1/2 -translate-x-1/2 z-50 w-[1280px] bg-background/80 backdrop-blur-xl border-b border-white/10 shadow-[0_4px_30px_rgba(0,0,0,0.5)]">
 <div class="max-w-container-max mx-auto px-margin-desktop py-4 flex justify-between items-center">
 <div class="flex items-center gap-base">
-<div class="relative w-10 h-10 rounded-full overflow-hidden border-2 border-primary">
+<div class="relative w-12 h-12 rounded-full overflow-hidden border-2 border-primary neon-glow-purple">
 <img alt="GD Evenings Club Logo" class="w-full h-full object-cover" src="https://lh3.googleusercontent.com/aida-public/AB6AXuCZyUGzcrZvQ4W7euRMhEhWH4qSdCmiKSjGgIDY00aGDIsSKWHq74OXhv13YNN-U0jdduKFfgheoeuPIc6rgMU59DuXPDA0OtcYNd3gQOU6ayBforqZpdzfjuWSle9--ez1dMNJqvwoSsiDW4LnjhxJ67JcXIpxxxt06WJtPkamS4CKj_RHDzXxY7zwSHMEreLe1xveJkDecfcL8uW7jCQq6ijhnjB4vTw5SP0kTWFsS72cFgZHV_4Bcy_zINfsuJUHHR5apK70bpg"/>
 </div>
-<span class="font-headline-lg text-[24px] font-black text-primary drop-shadow-[0_0_10px_rgba(220,184,255,0.5)]">GD Evenings</span>
+<span class="font-headline-lg text-headline-lg font-black text-primary drop-shadow-[0_0_10px_rgba(220,184,255,0.5)]">GD Evenings</span>
 </div>
 <div class="flex items-center gap-gutter">
-<a class="text-on-surface-variant hover:text-primary transition-colors text-body-md" href="#">About Club</a>
-<a class="text-on-surface-variant hover:text-primary transition-colors text-body-md" href="#">Games</a>
-<a class="text-on-surface-variant hover:text-primary transition-colors text-body-md" href="#">Events</a>
-<a class="text-on-surface-variant hover:text-primary transition-colors text-body-md" href="#">Forum</a>
-<a class="text-primary border-b-2 border-primary pb-1 font-bold text-body-md" href="#">Store</a>
+<a class="text-on-surface-variant hover:text-primary transition-colors duration-200 font-body-md text-body-md" href="#">About Club</a>
+<a class="text-on-surface-variant hover:text-primary transition-colors duration-200 font-body-md text-body-md" href="../GamesPage/games_page.html">Games</a>
+<a class="text-on-surface-variant hover:text-primary transition-colors duration-200 font-body-md text-body-md" href="../EventPage/event_page.html">Events</a>
+<a class="text-on-surface-variant hover:text-primary transition-colors duration-200 font-body-md text-body-md" href="#">Forum</a>
+<a class="text-primary border-b-2 border-primary pb-1 px-3 py-1 bg-black/30 shadow-inner rounded-t-md font-bold font-body-md text-body-md" href="#">Store</a>
 </div>
 <div class="flex items-center gap-gutter">
 <div class="flex items-center gap-4 text-on-surface-variant">
-<span class="material-symbols-outlined hover:text-primary cursor-pointer" data-icon="notifications">notifications</span>
-<span class="material-symbols-outlined hover:text-primary cursor-pointer" data-icon="person_pin">person_pin</span>
+<span class="material-symbols-outlined hover:text-primary cursor-pointer transition-colors" data-icon="notifications">notifications</span>
+<span class="material-symbols-outlined hover:text-primary cursor-pointer transition-colors" data-icon="person_pin">person_pin</span>
 </div>
-<button class="bg-primary text-on-primary px-6 py-2 rounded-full font-bold hover:scale-105 transition-all">Login</button>
+<button class="bg-primary text-on-primary px-8 py-2 rounded-full font-bold hover:scale-105 active:scale-95 transition-all duration-300 neon-glow-purple">
+                    Login
+                </button>
 </div>
 </div>
 </nav>
