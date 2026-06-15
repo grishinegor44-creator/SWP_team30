@@ -97,12 +97,6 @@
             <artifactId>spring-modulith-starter-jpa</artifactId>
         </dependency>
 
-        <!-- Thymeleaf Security -->
-        <dependency>
-            <groupId>org.thymeleaf.extras</groupId>
-            <artifactId>thymeleaf-extras-springsecurity6</artifactId>
-        </dependency>
-
         <!-- DevTools & Docker -->
         <dependency>
             <groupId>org.springframework.boot</groupId>
