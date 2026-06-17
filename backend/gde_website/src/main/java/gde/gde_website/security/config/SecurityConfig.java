@@ -15,18 +15,16 @@ public class SecurityConfig {
     public SecurityFilterChain securityFilterChain(HttpSecurity http) throws Exception {
         http
                 .authorizeHttpRequests(auth -> auth
-                        // Разрешаем GET запросы к /games всем без исключения
+                        // Allow requests for /games endpoints without authentication
                         .requestMatchers(org.springframework.http.HttpMethod.GET, "/games").permitAll()
                         .requestMatchers(org.springframework.http.HttpMethod.GET, "/games/**").permitAll()
-
-                        // Временно разрешаем всё остальное, чтобы не мешало разрабатывать
-                        // Потом заменишь на .anyRequest().authenticated()
+                        // #TODO: debug mode
                         .anyRequest().permitAll()
                 )
-                // Отключаем стандартную форму логина и Basic Auth для REST API
+                // Disable Basic Auth for REST API
                 .formLogin(AbstractHttpConfigurer::disable)
                 .httpBasic(AbstractHttpConfigurer::disable)
-                // Важно для REST: отключаем CSRF, иначе POST/PUT/PATCH запросы будут блокироваться
+                // Disable CSRF, or POST/PUT/PATCH requests would be blocked
                 .csrf(AbstractHttpConfigurer::disable);
 
         return http.build();
