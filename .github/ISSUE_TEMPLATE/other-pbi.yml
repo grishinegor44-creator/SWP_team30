@@ -1,6 +1,6 @@
 name: Other PBI
 description: Create a new Product Backlog Item (technical task, bug, documentation, spike, etc.)
-title: "[PBI-XXX] "
+title: "[PBI] "
 labels: []
 projects: []
 body:
