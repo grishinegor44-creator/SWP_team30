@@ -25,15 +25,13 @@ public class GamesController {
 
     private final GamesService gamesService;
 
-    private final GamesRepository gamesRepository;
-
     @GetMapping
-    public Page<GamesEntity> getAllGames(
+    public ResponseEntity<Page<GamesEntity>> getAllGames(
             @RequestParam(defaultValue = "0") int page,
             @RequestParam(defaultValue = "24") int size
     ) {
         Pageable pageable = PageRequest.of(page, size, Sort.by("createdAt"));
-        return gamesRepository.findAllByOrderByCreatedAtDesc(pageable);
+        return ResponseEntity.status(HttpStatus.OK).body(gamesService.getAllGames(pageable));
     }
 
     // #TODO: implement this function
