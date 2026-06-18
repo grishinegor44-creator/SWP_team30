@@ -68,13 +68,13 @@ function GamePage() {
   }
 
   if (loading) {
-    return <div>Загрузка игры...</div>;
+    return <Loader text="Загрузка игры..." />;
   }
 
   if (error) {
     return (
       <div>
-        <p>Ошибка: {error}</p>
+        <ErrorState message={error} />;
         <Link to="/games">Вернуться в каталог</Link>
       </div>
     );
@@ -83,7 +83,7 @@ function GamePage() {
   if (!game) {
     return (
       <div>
-        <p>Игра не найдена.</p>
+        <ErrorState message="Игра не найдена." />;
         <Link to="/games">Вернуться в каталог</Link>
       </div>
     );

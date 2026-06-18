@@ -46,7 +46,7 @@ function CreateGamePage() {
 
       <h1>Создать игру</h1>
 
-      {error ? <p>Ошибка: {error}</p> : null}
+      {error ? <ErrorState message={error} /> : null}
 
       <form onSubmit={handleSubmit}>
         <div>

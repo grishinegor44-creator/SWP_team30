@@ -2,6 +2,9 @@ import React, { useEffect, useState } from "react";
 import { Link } from "react-router-dom";
 import { getGames } from "../api/api";
 import GameCard from "../components/GameCard";
+import Loader from "../components/Loader";
+import ErrorState from "../components/ErrorState";
+import EmptyState from "../components/EmptyState";
 
 function GamesPage() {
   const [games, setGames] = useState([]);
@@ -27,18 +30,18 @@ function GamesPage() {
   }, []);
 
   if (loading) {
-    return <div>Загрузка игр...</div>;
+    return <Loader text="Загрузка игр..." />;
   }
 
   if (error) {
-    return <div>Ошибка: {error}</div>;
+    return <ErrorState message={error} />;
   }
 
   if (games.length === 0) {
     return (
       <div>
         <h1>Каталог игр</h1>
-        <p>Пока нет ни одной игры.</p>
+        <EmptyState message="Пока нет ни одной игры." />
         <Link to="/games/create">Создать первую игру</Link>
       </div>
     );
