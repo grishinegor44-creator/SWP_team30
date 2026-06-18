@@ -2,10 +2,11 @@ import React, { useState } from "react";
 import { Link, useNavigate } from "react-router-dom";
 import ErrorState from "../components/ErrorState";
 import { useAuth } from "../context/auth-context";
+import { registerUser } from "../api/api";
 
 function AuthPage() {
   const navigate = useNavigate();
-  const { login, register } = useAuth();
+  const { login } = useAuth();
 
   const [mode, setMode] = useState("login");
   const [username, setUsername] = useState("");
@@ -28,7 +29,7 @@ function AuthPage() {
         await login({ username, password });
         navigate("/games");
       } else {
-        await register({ username, email, password });
+        await registerUser({ username, email, password });
         setSuccessMessage(
           "Регистрация прошла успешно. Теперь войдите в аккаунт.",
         );

@@ -1,29 +1,31 @@
-import React, { useState } from "react";
+import React, { useEffect, useState } from "react";
 import { AuthContext } from "./auth-context";
+import { getCurrentUser, loginUser } from "../api/api";
 
 export function AuthProvider({ children }) {
   const [user, setUser] = useState(null);
+  const [authLoading, setAuthLoading] = useState(true);
+
+  useEffect(() => {
+    async function loadUser() {
+      try {
+        const data = await getCurrentUser();
+        setUser(data.user || data);
+      } catch {
+        setUser(null);
+      } finally {
+        setAuthLoading(false);
+      }
+    }
+
+    loadUser();
+  }, []);
 
   const login = async (credentials) => {
-    const mockUser = {
-      id: 1,
-      username: credentials.username || "demo_user",
-      email: "demo@example.com",
-    };
-
-    setUser(mockUser);
-    return mockUser;
-  };
-
-  const register = async (data) => {
-    const mockUser = {
-      id: 1,
-      username: data.username || "new_user",
-      email: data.email || "new@example.com",
-    };
-
-    setUser(mockUser);
-    return mockUser;
+    const data = await loginUser(credentials);
+    const nextUser = data.user || data;
+    setUser(nextUser);
+    return data;
   };
 
   const logout = () => {
@@ -33,8 +35,8 @@ export function AuthProvider({ children }) {
   const value = {
     user,
     isAuthenticated: Boolean(user),
+    authLoading,
     login,
-    register,
     logout,
   };
 
