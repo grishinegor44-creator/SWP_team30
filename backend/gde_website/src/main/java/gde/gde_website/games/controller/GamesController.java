@@ -109,7 +109,7 @@ public class GamesController {
         Long currentUserId = (Long) authentication.getPrincipal();
 
         Games deletedGame = gamesService.deleteGame(id, currentUserId);
-        return ResponseEntity.status(204).body(deletedGame);
+        return ResponseEntity.status(204).build();
     }
 
     // #TODO: debug
