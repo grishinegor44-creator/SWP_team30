@@ -1,8 +1,6 @@
 package gde.gde_website.users.controller;
 
-import gde.gde_website.games.controller.GamesController;
-import gde.gde_website.users.model.AuthResponse;
-import gde.gde_website.users.model.User;
+import gde.gde_website.users.model.*;
 import gde.gde_website.users.service.UsersService;
 import lombok.RequiredArgsConstructor;
 import org.slf4j.Logger;
@@ -10,8 +8,6 @@ import org.slf4j.LoggerFactory;
 import org.springframework.http.ResponseEntity;
 import org.springframework.security.core.Authentication;
 import org.springframework.web.bind.annotation.*;
-
-import java.util.Map;
 
 @RestController
 @RequestMapping("/auth")
@@ -28,8 +24,8 @@ public class UsersController {
     // where SessionToken is a user session token which is provided by the AuthenticationController
 
     @PostMapping("/register")
-    public ResponseEntity<AuthResponse> register(
-            @RequestBody Map<String, String> userToRegisterBody
+    public ResponseEntity<LoginResponse> register(
+            @RequestBody RegisterRequest request
     ) {
         return null;
     }
@@ -41,8 +37,8 @@ public class UsersController {
     // where SessionToken is a user session token which is provided by the AuthenticationController
 
     @PostMapping("/login")
-    public ResponseEntity<AuthResponse> login(
-            @RequestBody Map<String, String> userToLoginBody
+    public ResponseEntity<LoginResponse> login(
+            @RequestBody LoginRequest request
             ) {
         return null;
     }
@@ -51,6 +47,6 @@ public class UsersController {
     public ResponseEntity<User> me(
             Authentication authentication
     ) {
-
+        return null;
     }
 }
