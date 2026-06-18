@@ -59,7 +59,9 @@ public class GamesController {
     // This function must save new created game into DB
     @PostMapping
     public ResponseEntity<Games> createGame(
-            @RequestBody Games gameToBeCreated,
+            @RequestParam  String title,
+            @RequestParam String description,
+            @RequestParam String bannerUrl,
             Authentication authentication
     ) {
         Long currentUserId = null;
@@ -71,9 +73,9 @@ public class GamesController {
         Games gameWithCurrentAuthor = new Games(
                 null,
                 currentUserId,
-                gameToBeCreated.title(),
-                gameToBeCreated.description(),
-                gameToBeCreated.bannerUrl(),
+                title,
+                description,
+                bannerUrl,
                 null,
                 null
         );
