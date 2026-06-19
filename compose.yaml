@@ -1,10 +1,17 @@
 services:
   postgres:
     image: 'postgres:latest'
+    restart: unless-stopped
     environment:
       - 'POSTGRES_DB=mydatabase'
       - 'POSTGRES_PASSWORD=secret'
       - 'POSTGRES_USER=myuser'
+    healthcheck:
+      test: ['CMD-SHELL', 'pg_isready -U myuser -d mydatabase']
+      interval: 10s
+      timeout: 5s
+      retries: 5
+      start_period: 10s
     ports:
       - '5432:5432'
     networks:
@@ -14,6 +21,7 @@ services:
 
   pgadmin:
     image: 'dpage/pgadmin4:latest'
+    restart: unless-stopped
     environment:
       - 'PGADMIN_DEFAULT_EMAIL=admin@example.com'
       - 'PGADMIN_DEFAULT_PASSWORD=admin'
@@ -28,6 +36,7 @@ services:
     build:
       context: ./backend/gde_website
       dockerfile: Dockerfile
+    restart: unless-stopped
     ports:
       - '8080:8080'
     environment:
@@ -35,7 +44,8 @@ services:
       - 'SPRING_DATASOURCE_USERNAME=myuser'
       - 'SPRING_DATASOURCE_PASSWORD=secret'
     depends_on:
-      - postgres
+      postgres:
+        condition: service_healthy
     networks:
       - gde-network
 
@@ -43,6 +53,7 @@ services:
     build:
       context: ./frontend
       dockerfile: Dockerfile
+    restart: unless-stopped
     ports:
       - '80:80'
     depends_on:
