@@ -40,6 +40,8 @@ export function AuthProvider({ children }) {
     const data = await loginUser(credentials);
     const nextToken = data.token || data.sessionToken || data.accessToken;
 
+    // console.log("ответ от сервера при логине:", data);
+
     if (!nextToken) {
       throw new Error("Токен не пришел с сервера");
     }

@@ -52,7 +52,7 @@ function GamePage() {
       formData.append("description", description);
 
       if (banner) {
-        formData.append("banner", banner);
+        formData.append("bannerUrl", banner);
       }
 
       const updatedGame = await updateGame(id, formData, token);
