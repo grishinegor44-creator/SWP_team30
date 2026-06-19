@@ -10,7 +10,7 @@ function CreateGamePage() {
 
   const [title, setTitle] = useState("");
   const [description, setDescription] = useState("");
-  const [banner, setBanner] = useState(null);
+  const [bannerUrl, setBannerUrl] = useState("");
   const [error, setError] = useState("");
   const [submitting, setSubmitting] = useState(false);
 
@@ -25,8 +25,8 @@ function CreateGamePage() {
       formData.append("title", title);
       formData.append("description", description);
 
-      if (banner) {
-        formData.append("bannerUrl", banner);
+      if (bannerUrl) {
+        formData.append("bannerUrl", bannerUrl);
       }
 
       const createdGame = await createGame(formData, token);
@@ -85,11 +85,12 @@ function CreateGamePage() {
               Баннер
             </label>
             <input
-              id="banner"
-              className="file-input"
-              type="file"
-              accept="image/*"
-              onChange={(event) => setBanner(event.target.files[0] || null)}
+              id="bannerUrl"
+              className="input"
+              type="url"
+              placeholder="https://biographe.ru/char/shrek/"
+              value={bannerUrl}
+              onChange={(event) => setBannerUrl(event.target.value)}
             />
           </div>
 
