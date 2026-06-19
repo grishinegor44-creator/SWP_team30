@@ -5,9 +5,20 @@ import gde.gde_website.games.model.Games;
 import gde.gde_website.games.model.GamesResponce;
 import org.springframework.stereotype.Component;
 
+/**
+ * This is a class responsible for transformations between objects
+ * @Author: Artemii Gorelov, Egor Grishin
+ */
 @Component
 public class GamesMapper {
 
+    /**
+     * This method is used to transform game response entity to response
+     * @param entity - entity to be transformed
+     * @param currentUserId - current user id
+     * @return returns game response object
+     * @Author: Egor Grishin
+     */
     public GamesResponce entityToResponse(GamesEntity entity, Long currentUserId) {
         boolean isOwner = currentUserId != null && currentUserId.equals(entity.getAuthorId());
 
@@ -23,6 +34,12 @@ public class GamesMapper {
         );
     }
 
+    /**
+     * This method is used for transforming game to entity
+     * @param games - game to be transformed
+     * @return new games entity object
+     * @Author: Artemii Gorelov
+     */
     public GamesEntity gamesToEntity(Games games) {
         return new GamesEntity(
                 games.authorId(),
@@ -32,6 +49,11 @@ public class GamesMapper {
         );
     }
 
+    /**
+     * This method is used to transform entity to games
+     * @param entity - entity to be transformed
+     * @return new game object
+     */
     public Games entityToGames(GamesEntity entity) {
         return new Games(
                 entity.getId(),
