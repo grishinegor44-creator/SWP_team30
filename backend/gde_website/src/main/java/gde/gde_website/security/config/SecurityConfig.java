@@ -15,6 +15,10 @@ import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.security.web.SecurityFilterChain;
 import org.springframework.security.web.authentication.UsernamePasswordAuthenticationFilter;
 
+/**
+ * This is a class which controlling HTTP requests security
+ * @Author: Artemii Gorelov
+ */
 @Configuration
 @EnableWebSecurity
 @RequiredArgsConstructor
@@ -22,6 +26,14 @@ public class SecurityConfig {
 
     private final JwtFilter jwtFilter;
 
+    /**
+     * This method represents chain of security rules for HTTP requests
+     * @param http - HTTP security method
+     * @return filter of rules decided to apply for specific requests
+     * @throws Exception if some request which is linked with authentication is denied
+     *
+     * @Author: Artemii Gorelov
+     */
     @Bean
     public SecurityFilterChain securityFilterChain(HttpSecurity http) throws Exception {
         http
@@ -63,6 +75,11 @@ public class SecurityConfig {
         return http.build();
     }
 
+    /**
+     * This method is used for encode user password
+     * @return encoded BCrypt user password
+     * @Author: Artemii Gorelov
+     */
     @Bean
     public PasswordEncoder passwordEncoder() {
         return new BCryptPasswordEncoder();

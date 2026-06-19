@@ -27,18 +27,16 @@ public class JwtFilter extends OncePerRequestFilter {
 
         String authHeader = request.getHeader("Authorization");
 
-        // Если токена нет — просто пропускаем запрос дальше (без аутентификации)
         if (authHeader == null || !authHeader.startsWith("Bearer ")) {
             filterChain.doFilter(request, response);
             return;
         }
 
-        String token = authHeader.substring(7); // убираем "Bearer "
+        String token = authHeader.substring(7);
 
         if (jwtUtils.isTokenValid(token)) {
             Long userId = jwtUtils.extractUserId(token);
 
-            // Кладём userId прямо как principal — Long
             UsernamePasswordAuthenticationToken authentication =
                     new UsernamePasswordAuthenticationToken(userId, null, List.of());
 
