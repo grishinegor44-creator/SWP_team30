@@ -145,6 +145,18 @@ public class GamesService {
         gameToUpdate.setDescription(entity.description());
         gameToUpdate.setBannerUrl(entity.bannerUrl());
 
+        if (entity.gameTags() != null) {
+            for (String tagName : entity.gameTags()) {
+                TagEntity tag = tagRepository.findByName(tagName)
+                        .orElseThrow(() -> new ResponseStatusException(
+                                HttpStatus.BAD_REQUEST,
+                                "Tag not found: " + tagName
+                        ));
+
+                gameTagRepository.save(new GameTagEntity(gameId, tag.getId()));
+            }
+        }
+
         GamesEntity savedGame = gamesRepository.save(gameToUpdate);
         gamesServiceLogger.info("Successfully updated game id={}", gameId);
 
