@@ -10,6 +10,8 @@ import gde.gde_website.games.model.GamesPageResponce;
 import gde.gde_website.games.repository.GameTagRepository;
 import gde.gde_website.games.repository.GamesRepository;
 import gde.gde_website.games.repository.TagRepository;
+import jakarta.persistence.EntityManager;
+import jakarta.persistence.PersistenceContext;
 import lombok.RequiredArgsConstructor;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
@@ -107,8 +109,16 @@ public class GamesService {
             }
         }
 
-        GamesEntity gameWithTags = gamesRepository.findById(savedGame.getId()).orElseThrow();
-        return mapper.entityToGames(gameWithTags);
+        return new Games(
+                savedGame.getId(),
+                savedGame.getAuthorId(),
+                savedGame.getTitle(),
+                savedGame.getDescription(),
+                savedGame.getBannerUrl(),
+                savedGame.getCreatedAt(),
+                savedGame.getUpdatedAt(),
+                entity.gameTags()
+        );
     }
 
     /**
@@ -134,6 +144,18 @@ public class GamesService {
         gameToUpdate.setTitle(entity.title());
         gameToUpdate.setDescription(entity.description());
         gameToUpdate.setBannerUrl(entity.bannerUrl());
+
+        if (entity.gameTags() != null) {
+            for (String tagName : entity.gameTags()) {
+                TagEntity tag = tagRepository.findByName(tagName)
+                        .orElseThrow(() -> new ResponseStatusException(
+                                HttpStatus.BAD_REQUEST,
+                                "Tag not found: " + tagName
+                        ));
+
+                gameTagRepository.save(new GameTagEntity(gameId, tag.getId()));
+            }
+        }
 
         GamesEntity savedGame = gamesRepository.save(gameToUpdate);
         gamesServiceLogger.info("Successfully updated game id={}", gameId);
