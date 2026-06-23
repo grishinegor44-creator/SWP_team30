@@ -1,6 +1,7 @@
 package gde.gde_website.games.model;
 
 import java.time.Instant;
+import java.util.List;
 
 /**
  * This is a record which represent game response
@@ -14,7 +15,7 @@ import java.time.Instant;
  * @param isOwner - represents status of user
  * @Author: Egor Grishin
  */
-public record GamesResponce(
+public record GamesCardResponce(
         Long id,
         Long authorId,
         String title,
@@ -22,6 +23,7 @@ public record GamesResponce(
         String bannerUrl,
         Instant createdAt,
         Instant updatedAt,
-        boolean isOwner
+        boolean isOwner,
+        List<String> gameTags
 ) {
 }
