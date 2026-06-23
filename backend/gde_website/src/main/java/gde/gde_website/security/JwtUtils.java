@@ -34,7 +34,6 @@ public class JwtUtils {
      * Parses the token and returns all JWT claims if the token is valid
      * @param token JWT string
      * @return all claims stored in the token payload
-     * @throws io.jsonwebtoken.JwtException if the token is invalid, malformed or expired
      */
     public Claims extractAllClaims(String token) {
         return Jwts.parser()
@@ -62,7 +61,7 @@ public class JwtUtils {
         try {
             extractAllClaims(token);
             return true;
-        } catch (JwtException e) {
+        } catch (Exception e) {
             return false;
         }
     }
@@ -74,7 +73,7 @@ public class JwtUtils {
      */
     public String generateToken(Long userId) {
         Date now = new Date();
-        Date expiration = new Date(now.getTime() + 2 * 60 * 1000L);
+        Date expiration = new Date(now.getTime() + 3 * 60 * 60 * 1000L);
 
         return Jwts.builder()
                 .claim("userId", userId)
