@@ -4,7 +4,7 @@ import gde.gde_website.games.entity.GamesEntity;
 import gde.gde_website.games.mapper.GamesMapper;
 import gde.gde_website.games.model.Games;
 import gde.gde_website.games.model.GamesCardResponce;
-import gde.gde_website.games.model.GamesResponce;
+import gde.gde_website.games.model.GamesPageResponce;
 import gde.gde_website.games.repository.GamesRepository;
 import lombok.RequiredArgsConstructor;
 import org.slf4j.Logger;
@@ -35,14 +35,14 @@ public class GamesService {
      * @return - returns  sublist of games entity
      * @Author: Artemii Gorelov
      */
-    public Page<GamesCardResponce> getAllGames(Pageable pageable) {
+    public Page<GamesPageResponce> getAllGames(Pageable pageable) {
         gamesServiceLogger.info("Called getAllGames method");
         return repository.findAllByOrderByCreatedAtDesc(pageable)
                 .map(game -> {
                     List<String> tagNames = game.getGameTags().stream()
                             .map(gameTag -> gameTag.getTag().getName()).toList();
 
-                    return new GamesCardResponce(
+                    return new GamesPageResponce(
                             game.getId(),
                             game.getTitle(),
                             game.getDescription(),
@@ -59,7 +59,7 @@ public class GamesService {
      * @return game response object
      * @Author: Egor Grishin
      */
-    public GamesResponce getGameById(Long gameId, Long currentUserId) {
+    public GamesCardResponce getGameById(Long gameId, Long currentUserId) {
         gamesServiceLogger.info("Called GamesService getGameById method");
         GamesEntity game = repository.findById(gameId).
                 orElseThrow(() -> new ResponseStatusException(HttpStatus.NOT_FOUND));

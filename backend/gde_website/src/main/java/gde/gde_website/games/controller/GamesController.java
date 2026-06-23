@@ -2,7 +2,7 @@ package gde.gde_website.games.controller;
 
 import gde.gde_website.games.model.Games;
 import gde.gde_website.games.model.GamesCardResponce;
-import gde.gde_website.games.model.GamesResponce;
+import gde.gde_website.games.model.GamesPageResponce;
 import gde.gde_website.games.service.GamesService;
 import lombok.RequiredArgsConstructor;
 import org.slf4j.Logger;
@@ -37,7 +37,7 @@ public class GamesController {
      * @Author: Artemii Gorelov
      */
     @GetMapping
-    public ResponseEntity<Page<GamesCardResponce>> getAllGames(
+    public ResponseEntity<Page<GamesPageResponce>> getAllGames(
             @RequestParam(defaultValue = "0") int page,
             @RequestParam(defaultValue = "24") int size
     ) {
@@ -55,7 +55,7 @@ public class GamesController {
      * @Author: Egor Grishin
      */
     @GetMapping("/{id}")
-    public ResponseEntity<GamesResponce> getGameById(
+    public ResponseEntity<GamesCardResponce> getGameById(
             @PathVariable("id") Long id,
             Authentication authentication) {
 
